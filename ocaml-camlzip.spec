@@ -15,6 +15,7 @@ Source: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.bz2
 Patch:      %{name}-1.03-findlib.patch
 BuildRequires:	ocaml
 BuildRequires:	findlib
+BuildRequires:	zlib-devel
 BuildRoot:	    %{_tmppath}/%{name}-%{version}
 
 %description
@@ -25,6 +26,7 @@ from and writing to compressed files in these formats.
 %package devel
 Summary:	Development files for %{name}
 Group:		Development/Other
+Requires:   zlib-devel
 
 %description devel
 This package contains the development files needed to build applications
