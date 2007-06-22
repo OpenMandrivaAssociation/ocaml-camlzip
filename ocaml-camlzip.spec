@@ -1,7 +1,7 @@
 %define up_name	camlzip
 %define name	ocaml-%{up_name}
 %define version	1.03
-%define release	%mkrel 2
+%define release	%mkrel 3
 %define ocaml_sitelib %(if [ -x /usr/bin/ocamlc ]; then ocamlc -where;fi)/site-lib
 
 Name:		%{name}
@@ -38,7 +38,7 @@ using %{name}.
 
 %build
 %make depend
-%make
+%make all allopt
 
 %install
 rm -rf %{buildroot}
