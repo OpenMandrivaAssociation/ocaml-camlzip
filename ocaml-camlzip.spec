@@ -1,8 +1,7 @@
 %define up_name	camlzip
 %define name	ocaml-%{up_name}
 %define version	1.03
-%define release	%mkrel 3
-%define ocaml_sitelib %(if [ -x /usr/bin/ocamlc ]; then ocamlc -where;fi)/site-lib
+%define release	%mkrel 4
 
 Name:		%{name}
 Version:	%{version}
@@ -27,6 +26,7 @@ from and writing to compressed files in these formats.
 Summary:	Development files for %{name}
 Group:		Development/Other
 Requires:	zlib-devel
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package contains the development files needed to build applications
@@ -50,8 +50,14 @@ rm -f %{buildroot}/%{ocaml_sitelib}/stublibs/*.owner
 %clean
 rm -rf %{buildroot}
 
-%files devel
+%files
 %defattr(-,root,root)
 %doc LICENSE README Changes
-%{ocaml_sitelib}/camlzip
+%dir %{ocaml_sitelib}/camlzip
+%{ocaml_sitelib}/camlzip/*.cmi
+
+%files devel
+%defattr(-,root,root)
+%{ocaml_sitelib}/camlzip/*
+%exclude %{ocaml_sitelib}/camlzip/*.cmi
 %{ocaml_sitelib}/stublibs/dllcamlzip.so
