@@ -15,6 +15,7 @@ Patch0:		%{name}-1.03-findlib.patch
 BuildRequires:	ocaml
 BuildRequires:	findlib
 BuildRequires:	zlib-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 This Objective Caml library provides easy access to compressed files in ZIP and
