@@ -13,7 +13,7 @@ URL:		http://pauillac.inria.fr/~xleroy/software.html
 Source: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.gz
 Patch:		%{name}-1.03-findlib.patch
 BuildRequires:	ocaml
-BuildRequires:	findlib
+BuildRequires:	ocaml-findlib
 BuildRequires:	zlib-devel
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 
