@@ -1,7 +1,7 @@
 %define up_name	camlzip
 %define name	ocaml-%{up_name}
 %define version	1.04
-%define release	%mkrel 1
+%define release	%mkrel 2
 
 Name:		%{name}
 Version:	%{version}
@@ -42,10 +42,9 @@ using %{name}.
 
 %install
 rm -rf %{buildroot}
-install -d -m 755 %{buildroot}/%{ocaml_sitelib}/camlzip
-install -d -m 755 %{buildroot}/%{ocaml_sitelib}/stublibs
-make install OCAMLFIND_INSTFLAGS="-destdir %{buildroot}/%{ocaml_sitelib}"
-rm -f %{buildroot}/%{ocaml_sitelib}/stublibs/*.owner
+install -d -m 755 %{buildroot}/%{_libdir}/ocaml/camlzip
+install -d -m 755 %{buildroot}/%{_libdir}/ocaml/stublibs
+make install OCAMLFIND_INSTFLAGS="-destdir %{buildroot}/%{_libdir}/ocaml"
 
 %clean
 rm -rf %{buildroot}
@@ -53,15 +52,16 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc LICENSE README Changes
-%dir %{ocaml_sitelib}/camlzip
-%{ocaml_sitelib}/camlzip/*.cmi
-%{ocaml_sitelib}/camlzip/*.cma
-%{ocaml_sitelib}/camlzip/META
-%{ocaml_sitelib}/stublibs/dllcamlzip.so
+%dir %{_libdir}/ocaml/camlzip
+%{_libdir}/ocaml/camlzip/*.cmi
+%{_libdir}/ocaml/camlzip/*.cma
+%{_libdir}/ocaml/camlzip/META
+%{_libdir}/ocaml/stublibs/dllcamlzip.so
+%{_libdir}/ocaml/stublibs/dllcamlzip.so.owner
 
 %files devel
 %defattr(-,root,root)
-%{ocaml_sitelib}/camlzip/*.a
-%{ocaml_sitelib}/camlzip/*.cmx
-%{ocaml_sitelib}/camlzip/*.cmxa
-%{ocaml_sitelib}/camlzip/*.mli
+%{_libdir}/ocaml/camlzip/*.a
+%{_libdir}/ocaml/camlzip/*.cmx
+%{_libdir}/ocaml/camlzip/*.cmxa
+%{_libdir}/ocaml/camlzip/*.mli
