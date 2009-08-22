@@ -7,7 +7,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Summary:	Reading and writing ZIP, JAR and GZIP files
-License:	GPL
+License:	LGPLv2 with exceptions
 Group:		Development/Other
 URL:		http://pauillac.inria.fr/~xleroy/software.html
 Source0: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.gz
