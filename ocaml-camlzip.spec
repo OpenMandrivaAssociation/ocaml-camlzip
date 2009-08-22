@@ -13,6 +13,7 @@ URL:		http://pauillac.inria.fr/~xleroy/software.html
 Source0: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.gz
 Patch0:		%{name}-1.03-findlib.patch
 Patch1:		test-makefile.dpatch
+Patch2:		uncompress.dpatch
 BuildRequires:	ocaml
 BuildRequires:	ocaml-findlib
 BuildRequires:	zlib-devel
@@ -37,6 +38,7 @@ using %{name}.
 %setup -q -n %{up_name}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 sed -i -e "s:@VERSION@:%{version}:g" META
 
 %build
