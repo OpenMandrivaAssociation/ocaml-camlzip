@@ -1,7 +1,7 @@
 %define up_name	camlzip
 %define name	ocaml-%{up_name}
 %define version	1.04
-%define release	%mkrel 4
+%define release	%mkrel 5
 
 Name:		%{name}
 Version:	%{version}
@@ -10,8 +10,9 @@ Summary:	Reading and writing ZIP, JAR and GZIP files
 License:	GPL
 Group:		Development/Other
 URL:		http://pauillac.inria.fr/~xleroy/software.html
-Source: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.gz
-Patch:		%{name}-1.03-findlib.patch
+Source0: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.gz
+Patch0:		%{name}-1.03-findlib.patch
+Patch1:		test-makefile.dpatch
 BuildRequires:	ocaml
 BuildRequires:	ocaml-findlib
 BuildRequires:	zlib-devel
@@ -34,12 +35,15 @@ using %{name}.
 
 %prep
 %setup -q -n %{up_name}-%{version}
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 sed -i -e "s:@VERSION@:%{version}:g" META
 
 %build
 %make depend
 %make all allopt
+mkdir -p doc
+ocamldoc -colorize-code -html gzip.mli zip.mli zlib.mli -d doc
 
 %install
 rm -rf %{buildroot}
@@ -62,6 +66,7 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root)
+%doc test doc
 %{_libdir}/ocaml/zip/*.a
 %{_libdir}/ocaml/zip/*.cmx
 %{_libdir}/ocaml/zip/*.cmxa
