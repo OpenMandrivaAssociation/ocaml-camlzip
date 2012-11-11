@@ -1,0 +1,49 @@
+diff -Nau camlzip-1.03/Makefile camlzip-1.03-findlib/Makefile
+--- camlzip-1.03/Makefile	2002-04-22 17:28:57.000000000 +0200
++++ camlzip-1.03-findlib/Makefile	2007-04-26 21:10:15.000000000 +0200
+@@ -15,9 +15,9 @@
+ 
+ ### End of configuration section
+ 
+-OCAMLC=ocamlc -g
+-OCAMLOPT=ocamlopt
+-OCAMLDEP=ocamldep
++OCAMLC=ocamlfind ocamlc
++OCAMLOPT=ocamlfind ocamlopt
++OCAMLDEP=ocamlfind ocamldep
+ OCAMLMKLIB=ocamlmklib
+ 
+ OBJS=zlib.cmo zip.cmo gzip.cmo
+@@ -55,18 +55,7 @@
+ 	rm -f *.o *.a
+ 
+ install:
+-	mkdir -p $(INSTALLDIR)
+-	cp zip.cma zip.cmi gzip.cmi zip.mli gzip.mli libcamlzip.a $(INSTALLDIR)
+-	if test -f dllcamlzip.so; then \
+-	  cp dllcamlzip.so $(INSTALLDIR); \
+-          ldconf=`$(OCAMLC) -where`/ld.conf; \
+-          installdir=$(INSTALLDIR); \
+-          if test `grep -s -c $$installdir'$$' $$ldconf || :` = 0; \
+-          then echo $$installdir >> $$ldconf; fi \
+-        fi
+-
+-installopt:
+-	cp zip.cmxa zip.a zip.cmx gzip.cmx $(INSTALLDIR)
++	ocamlfind install $(OCAMLFIND_INSTFLAGS) zip META zip.cma zip.cmi gzip.cmi zlib.cmi zip.mli gzip.mli zlib.mli libcamlzip.a dllcamlzip.so zip.cmxa zip.a zip.cmx gzip.cmx zlib.cmx
+ 
+ depend:
+ 	gcc -MM -I$(ZLIB_INCLUDE) *.c > .depend
+diff -Nau camlzip-1.03/META camlzip-1.03-findlib/META
+--- camlzip-1.03/META	1970-01-01 01:00:00.000000000 +0100
++++ camlzip-1.03-findlib/META	2007-04-13 12:11:43.000000000 +0200
+@@ -0,0 +1,8 @@
++name="zip"
++version="@VERSION@"
++description="reading and writing ZIP, JAR and GZIP files"
++requires="unix"
++archive(byte)="zip.cma"
++archive(native)="zip.cmxa"
++linkopts = ""
++
+Les sous-répertoires camlzip-1.03/test et camlzip-1.03-findlib/test sont identiques.

@@ -1,0 +1,62 @@
+#! /bin/sh -e
+## uncompress.dpatch by Sven Luther <luther@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Add a plain_uncompress function which is a direct binding to zlib's
+## DP: uncompress function.
+
+if [ $# -ne 1 ]; then
+    echo "`basename $0`: script expects -patch|-unpatch as argument" >&2
+    exit 1
+fi
+case "$1" in
+    -patch) patch -f --no-backup-if-mismatch -p1 < $0;;
+    -unpatch) patch -f --no-backup-if-mismatch -R -p1 < $0;;
+    *)
+        echo "`basename $0`: script expects -patch|-unpatch as argument" >&2
+        exit 1;;
+esac
+
+exit 0
+@DPATCH@
+diff -urNad camlzip-1.04~/zlib.ml camlzip-1.04/zlib.ml
+--- camlzip-1.04~/zlib.ml	2009-02-10 12:13:14.000000000 +0100
++++ camlzip-1.04/zlib.ml	2009-02-10 12:13:51.000000000 +0100
+@@ -87,6 +87,8 @@
+   in
+   compr, compr_finish
+ 
++external plain_uncompress: string -> int -> string -> int -> bool = "camlzip_uncompress"
++
+ let uncompress ?(header = true) refill flush =
+   let inbuf = String.create buffer_size
+   and outbuf = String.create buffer_size in
+diff -urNad camlzip-1.04~/zlib.mli camlzip-1.04/zlib.mli
+--- camlzip-1.04~/zlib.mli	2009-02-10 12:13:14.000000000 +0100
++++ camlzip-1.04/zlib.mli	2009-02-10 12:13:16.000000000 +0100
+@@ -26,6 +26,8 @@
+ val uncompress:
+   ?header: bool -> (string -> int) -> (string -> int -> unit) -> unit
+ 
++val plain_uncompress: string -> int -> string -> int -> bool
++
+ type stream
+ 
+ type flush_command =
+diff -urNad camlzip-1.04~/zlibstubs.c camlzip-1.04/zlibstubs.c
+--- camlzip-1.04~/zlibstubs.c	2009-02-10 12:13:14.000000000 +0100
++++ camlzip-1.04/zlibstubs.c	2009-02-10 12:13:16.000000000 +0100
+@@ -173,3 +173,13 @@
+                           Long_val(len)));
+ }
+ 
++
++value camlzip_uncompress(value dest, value destlen, value src, value srclen)
++{
++  unsigned long destlenc = Int_val(destlen);
++  unsigned long srclenc = Int_val(srclen);
++  int status;
++  status = uncompress (String_val(dest), &destlenc, String_val(src), srclenc);
++  if (status == Z_OK) return Val_true;
++  else return Val_false;
++}

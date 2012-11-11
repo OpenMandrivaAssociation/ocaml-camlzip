@@ -1,0 +1,29 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## test-makefile.dpatch by Samuel Mimram <smimram@debian.org>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: Use an installed camlzip.
+
+@DPATCH@
+diff -urNad camlzip-1.03~/test/Makefile camlzip-1.03/test/Makefile
+--- camlzip-1.03~/test/Makefile	2001-08-07 17:32:08.000000000 +0200
++++ camlzip-1.03/test/Makefile	2007-02-18 13:55:19.000000000 +0100
+@@ -1,13 +1,13 @@
+ all: minizip minigzip
+ 
+-minigzip: ../zip.cma minigzip.ml
+-	ocamlc -ccopt -g -g -I .. -o minigzip ../zip.cma minigzip.ml
++minigzip: minigzip.ml
++	ocamlc -ccopt -g -g -I +zip  -o minigzip zip.cma minigzip.ml
+ 
+-minizip: ../zip.cma minizip.ml
+-	ocamlc -ccopt -g -g -I .. -o minizip unix.cma ../zip.cma minizip.ml
++minizip: minizip.ml
++	ocamlc -ccopt -g -g -I +zip -o minizip unix.cma zip.cma minizip.ml
+ 
+ testzlib: ../zip.cma testzlib.ml
+-	ocamlc -g -I .. -o testzlib ../zip.cma testzlib.ml
++	ocamlc -g -I +zip -o testzlib zip.cma testzlib.ml
+ 
+ clean:
+ 	rm -f *.cm*
