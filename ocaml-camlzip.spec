@@ -73,3 +73,83 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/zip/*.cmx
 %{_libdir}/ocaml/zip/*.cmxa
 %{_libdir}/ocaml/zip/*.mli
+
+
+%changelog
+* Wed May 09 2012 Crispin Boylan <crisb@mandriva.org> 1.04-8
++ Revision: 797738
+- Rebuild
+
+* Thu Sep 10 2009 Florent Monnier <blue_prawn@mandriva.org> 1.04-7mdv2011.0
++ Revision: 436253
+- rebuild
+- consistency naming with Debian and Fedora
+
+* Sat Aug 22 2009 Florent Monnier <blue_prawn@mandriva.org> 1.04-6mdv2010.0
++ Revision: 419718
+- increm mkrel
+- corrected the license field
+
+* Sat Aug 22 2009 Florent Monnier <blue_prawn@mandriva.org> 1.04-5mdv2010.0
++ Revision: 419580
+- patch for plain_uncompress function from debian by Sven Luther
+- added a patch for the makefile of the tests
+- added test dir, with patched makefile (patch from debian by Samuel Mimram)
+  generating html doc
+
+* Sat Aug 22 2009 Florent Monnier <blue_prawn@mandriva.org> 1.04-4mdv2010.0
++ Revision: 419488
+- added missing files zlib.cmi / zlib.mli
+  modified the install dir, to align on fedora, debian and upstream
+
+* Sat Jun 27 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.04-3mdv2010.0
++ Revision: 389923
+- rebuild
+
+* Thu Jan 08 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.04-2mdv2009.1
++ Revision: 327123
+- site-lib hierarchy doesn't exist anymore
+
+  + Florent Monnier <blue_prawn@mandriva.org>
+    - findlib package name
+
+* Sun Dec 21 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.04-1mdv2009.1
++ Revision: 317101
+- new version
+- move all non-devel files into main package (Florent Monnier <fmonnier@linux-nantes.org>)
+
+* Tue Dec 09 2008 Pixel <pixel@mandriva.com> 1.03-8mdv2009.1
++ Revision: 312252
+- rebuild
+
+* Wed Jul 30 2008 Thierry Vignaud <tv@mandriva.org> 1.03-7mdv2009.0
++ Revision: 254187
+- rebuild
+
+* Tue Mar 04 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.03-5mdv2008.1
++ Revision: 178364
+- rebuild
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sat Sep 01 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.03-4mdv2008.0
++ Revision: 77659
+- drop macro definition, now in rpm-mandriva-setup
+  ship .cmi file in non-devel subpackage
+
+* Fri Jun 22 2007 Per Øyvind Karlsen <peroyvind@mandriva.org> 1.03-3mdv2008.0
++ Revision: 43333
+- build 'allopt' too
+
+* Tue Jun 19 2007 Per Øyvind Karlsen <peroyvind@mandriva.org> 1.03-2mdv2008.0
++ Revision: 41275
+- rebuild
+
+* Fri Apr 27 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.03-1mdv2008.0
++ Revision: 18545
+- Import ocaml-camlzip
+
