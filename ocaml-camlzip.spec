@@ -1,7 +1,7 @@
 %define up_name	camlzip
 %define name	ocaml-%{up_name}
 %define version	1.04
-%define release	8
+%define release	9
 
 Name:		%{name}
 Version:	%{version}
