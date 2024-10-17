@@ -9,7 +9,7 @@ Release:	%{release}
 Summary:	Reading and writing ZIP, JAR and GZIP files
 License:	LGPLv2 with exceptions
 Group:		Development/Other
-URL:		http://pauillac.inria.fr/~xleroy/software.html
+URL:		https://pauillac.inria.fr/~xleroy/software.html
 Source0: 	http://caml.inria.fr/distrib/bazar-ocaml/%{up_name}-%{version}.tar.gz
 Patch0:		%{name}-1.03-findlib.patch
 Patch1:		test-makefile.dpatch
